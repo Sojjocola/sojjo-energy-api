@@ -1,0 +1,30 @@
+version: '3'
+services:
+  node:
+    image: 'node:18-alpine'
+    container_name: sojjo-energy-node
+    user: 'node'
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - './src:/home/node/app'
+    ports:
+      - '8081:8081'
+    command: node index.js
+
+  influxdb:
+    image: 'influxdb:2.6-alpine'
+    container_name: sojjo-energy-influxdb
+    user: 'influxdb'
+    working_dir: /home/influxdb
+    volumes:
+      - './data:/var/lib/influxdb2'
+    expose:
+      - '8086'
+    ports:
+      - '8086:8086'
+    environment:
+      - INFLUX_DB=elec_data
+      - INFLUX_ADMIN_USER=admin
+      - INFLUX_ADMIN_PASSWORD=password

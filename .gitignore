@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# binary databases
+influxd.bolt
+*.db
+*.sqlite
+data/engine
